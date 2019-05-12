@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 5),
+                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                   width: 180.0,
                   padding: EdgeInsets.only(bottom: 8.0),
                   decoration: BoxDecoration(
@@ -49,49 +49,44 @@ class MyApp extends StatelessWidget {
                       fontSize: 14.0,
                       color: Colors.blueGrey,
                       fontFamily: 'NovaMono',
+                      letterSpacing: 1.0,
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(5.0, 4.0, 20.0, 4.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.phone,
-                        color: Colors.blueGrey[800],
+                Card(
+                  margin:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                  color: Colors.blueGrey[800],
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      '+91 123 456 7890',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
-                      Container(
-                        width: 180.0,
-                        alignment: Alignment.center,
-                        child: Text('+91 123 456 7890'),
-                      )
-                    ],
+                    ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(5.0, 4.0, 20.0, 4.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.mail,
-                        color: Colors.blueGrey[800],
+                Card(
+                  margin:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                  color: Colors.blueGrey[800],
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.mail,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'rohan.shah@email.com',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
-                      Container(
-                        width: 180.0,
-                        alignment: Alignment.center,
-                        child: Text('rohan.shah@email.com'),
-                      )
-                    ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
