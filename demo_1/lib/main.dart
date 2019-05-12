@@ -5,14 +5,14 @@ void main() {
     MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Demo 1'),
-          backgroundColor: Colors.blueGrey[900],
+          title: Text('Welcome'),
+          backgroundColor: Colors.brown[900],
         ),
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Colors.brown[800],
         body: Center(
           child: Container(
-            margin: EdgeInsets.all(0),
-            child: Image(image: AssetImage('images/diamond.png')),
+            margin: EdgeInsets.all(10),
+            child: Image(image: AssetImage('images/aliens.png')),
           ),
         ),
       ),
