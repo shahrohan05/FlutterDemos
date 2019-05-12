@@ -31,9 +31,20 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
+                  margin: EdgeInsets.only(top: 5),
+                  width: 180.0,
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 0.3,
+                      ),
+                    ),
+                  ),
                   child: Text(
                     'SOFTWARE DEVELOPER',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14.0,
                       color: Colors.blueGrey,
