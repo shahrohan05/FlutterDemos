@@ -52,7 +52,7 @@ class Dice extends StatefulWidget {
 }
 
 class _DiceState extends State<Dice> {
-  int diceNumber = 1;
+  int diceNumber = Random().nextInt(6) + 1;
   @override
   Widget build(BuildContext context) {
     return FlatButton(
