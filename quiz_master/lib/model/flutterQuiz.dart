@@ -1,38 +1,48 @@
-class Question {
-  String questionText;
-  bool result;
+import 'question.dart';
 
-  Question({String questionText, bool result}) {
-    this.questionText = questionText;
-    this.result = result;
-  }
-}
+int _questionNo = 0;
 
-List<Question> questions = [
+List<Question> _questions = [
   Question(
     questionText: 'Expanded widget can have a property called "flex"',
-    result: true,
+    answer: true,
   ),
   Question(
     questionText: 'List is a build-in type in Dart.',
-    result: true,
+    answer: true,
   ),
   Question(
     questionText: 'Column widget has a "child" property.',
-    result: false,
+    answer: false,
   ),
   Question(
     questionText:
         'You can fit multple widgets as children to the Container Widget.',
-    result: false,
+    answer: false,
   ),
   Question(
     questionText:
         'Stack widget can be used to lay out widgets on top of each other.',
-    result: true,
+    answer: true,
   ),
   Question(
     questionText: 'Icons is an external flutter package.',
-    result: false,
+    answer: false,
   )
 ];
+
+void nextQuestion() {
+  if (_questionNo < _questions.length - 1) {
+    _questionNo++;
+  } else {
+    _questionNo = 0;
+  }
+}
+
+String getQuestionText() {
+  return _questions[_questionNo].questionText;
+}
+
+bool getAnswer() {
+  return _questions[_questionNo].answer;
+}

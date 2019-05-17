@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model/questions.dart';
+import 'model/flutterQuiz.dart';
 
 void main() => runApp(QuizMasterApp());
 
@@ -22,11 +22,9 @@ class QuizMaster extends StatefulWidget {
 
 class _QuizMasterState extends State<QuizMaster> {
   List<Icon> results = [];
-  int queNo = 1;
-  Question question;
-  void updateQuestion(bool ans) {
+
+  void updateQuestion(bool ans, bool actualAns) {
     setState(() {
-      bool actualAns = question.result;
       if (ans == actualAns) {
         results.add(Icon(
           Icons.check,
@@ -38,17 +36,12 @@ class _QuizMasterState extends State<QuizMaster> {
           color: Colors.red,
         ));
       }
-      if (queNo == 5) {
-        queNo = 0;
-      } else {
-        queNo++;
-      }
+      nextQuestion();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    question = questions[queNo];
     return Scaffold(
       backgroundColor: Colors.grey[900],
       body: Container(
@@ -61,7 +54,7 @@ class _QuizMasterState extends State<QuizMaster> {
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
-                  question.questionText,
+                  getQuestionText(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -85,7 +78,7 @@ class _QuizMasterState extends State<QuizMaster> {
                   ),
                   color: Colors.green,
                   onPressed: () {
-                    updateQuestion(true);
+                    updateQuestion(true, getAnswer());
                   },
                 ),
               ),
@@ -105,7 +98,7 @@ class _QuizMasterState extends State<QuizMaster> {
                   ),
                   color: Colors.red,
                   onPressed: () {
-                    updateQuestion(false);
+                    updateQuestion(false, getAnswer());
                   },
                 ),
               ),
