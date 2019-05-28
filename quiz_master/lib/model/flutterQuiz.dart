@@ -39,6 +39,14 @@ void nextQuestion() {
   }
 }
 
+int getQuestionNumber() {
+  return _questionNo;
+}
+
+bool isQuizOver() {
+  return _questionNo == (_questions.length - 1);
+}
+
 String getQuestionText() {
   return _questions[_questionNo].questionText;
 }

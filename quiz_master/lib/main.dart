@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'model/flutterQuiz.dart';
 
@@ -23,7 +24,7 @@ class QuizMaster extends StatefulWidget {
 class _QuizMasterState extends State<QuizMaster> {
   List<Icon> results = [];
 
-  void updateQuestion(bool ans, bool actualAns) {
+  void updateQuestion(bool ans, bool actualAns, BuildContext context) {
     setState(() {
       if (ans == actualAns) {
         results.add(Icon(
@@ -35,6 +36,23 @@ class _QuizMasterState extends State<QuizMaster> {
           Icons.close,
           color: Colors.red,
         ));
+      }
+      if (isQuizOver()) {
+        Alert(
+            context: context,
+            title: "Congratulations!",
+            desc: "Your flutter quiz is over.",
+            buttons: [
+              DialogButton(
+                child: Text(
+                  'Cool',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+                color: Colors.grey[800],
+              )
+            ]).show();
+        results = [];
       }
       nextQuestion();
     });
@@ -78,7 +96,7 @@ class _QuizMasterState extends State<QuizMaster> {
                   ),
                   color: Colors.green,
                   onPressed: () {
-                    updateQuestion(true, getAnswer());
+                    updateQuestion(true, getAnswer(), context);
                   },
                 ),
               ),
@@ -98,7 +116,7 @@ class _QuizMasterState extends State<QuizMaster> {
                   ),
                   color: Colors.red,
                   onPressed: () {
-                    updateQuestion(false, getAnswer());
+                    updateQuestion(false, getAnswer(), context);
                   },
                 ),
               ),
