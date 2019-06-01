@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'story_driver.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,13 +24,42 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void showOutcome(String choice, BuildContext context) {
+    Alert(
+        context: context,
+        content: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  getOutcome(choice),
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blueGrey[800],
+                  ),
+                ),
+              ),
+              RaisedButton(
+                child: Text('Reset Game'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  resetStoryDriver();
+                },
+              )
+            ],
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: ExactAssetImage('images/background_3.png'),
+            image: ExactAssetImage(backgroundImage),
             fit: BoxFit.cover,
           ),
         ),
@@ -45,14 +77,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       vertical: 60.0,
                     ),
                     child: Card(
-                      color: const Color.fromARGB(220, 255, 255, 255),
+                      color: const Color.fromARGB(200, 255, 255, 255),
                       elevation: 16.0,
                       child: Center(
-                        child: Text(
-                          'Story goes here.',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.blueGrey[800],
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            currentStory,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey[800],
+                            ),
                           ),
                         ),
                       ),
@@ -69,14 +106,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: RaisedButton(
                       elevation: 10.0,
                       child: Text(
-                        'Choice 1',
+                        firstChoice,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
                         ),
                       ),
                       color: Colors.red[700],
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (!makeAChoice(firstChoice)) {
+                            showOutcome(firstChoice, context);
+                          }
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -90,14 +133,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: RaisedButton(
                       elevation: 10.0,
                       child: Text(
-                        'Choice 2',
+                        secondChoice,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
                         ),
                       ),
                       color: Colors.indigo[800],
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (!makeAChoice(secondChoice)) {
+                            showOutcome(secondChoice, context);
+                          }
+                        });
+                      },
                     ),
                   ),
                 )
