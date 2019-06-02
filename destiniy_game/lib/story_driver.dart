@@ -22,7 +22,7 @@ List<Story> _stories = <Story>[
           "You are running as fast as you can to get away from the zombies behind you and you see a truck coming at you at high speed.",
       choices: <Choice>[
         Choice(
-          choice: "Stay on road, wawe your hands and request for help.",
+          choice: "Stay on road, wave your hands and request for help.",
           storyIndex: 3,
         ),
         Choice(
@@ -141,7 +141,7 @@ List<Story> _stories = <Story>[
   Story(
       index: 9,
       story:
-          "As you go inside the station, you find some food and water. You are still very tired and could use a few hours of rest."
+          "As you go inside the station, you find some food and water. You are still very tired and could use a few hours of rest. "
           "But your instict tells you there is something wrong with the place.",
       choices: <Choice>[
         Choice(
@@ -223,7 +223,7 @@ List<Story> _stories = <Story>[
             storyIndex: -1,
             outcome:
                 "You lead the people, you look out for each other and somhow find a shelter for all the humans, "
-                "protected from the horrors of the zombieland, your group is happy and you all are"
+                "protected from the horrors of the zombieland, your group is happy and you all are "
                 "sitting in the porch of the shelter and suddenly you hear your phone ring, you wake up and realise it was all a dream. "),
         Choice(
             choice: "You deny thier appeal.",
@@ -255,7 +255,7 @@ List<Story> _stories = <Story>[
   Story(
       index: 15,
       story:
-          "As you move forward, you survive on your own and become stronger and more equipped to fight off any horror of this world."
+          "As you move forward, you survive on your own and become stronger and more equipped to fight off any horror of this world. "
           "On your path towards finding a safe shelter for humans you are met with 2 girls who are scared and stuck in an old house surrounded by "
           "zombies from all sides.",
       choices: <Choice>[
@@ -291,7 +291,7 @@ List<Story> _stories = <Story>[
             storyIndex: -1,
             outcome:
                 "You let the infection take control of your mind, you feel like you are stuck in a cage of your own body, you feel what you are doing "
-                "but you cant control your own body. After very long suffering of about a month you gradually and finally you die and your body keeps "
+                "but you can't control your own body. After very long suffering of about a month you gradually and finally you die and your body keeps "
                 "walking around dead.")
       ]),
 ];
@@ -300,19 +300,30 @@ int _currentStoryIndex = 0;
 
 String _backgroundImage = 'images/background_zombie.jpg';
 
-bool makeAChoice(String userChoice) {
-  bool changed = false;
+void makeAChoice(String userChoice) {
   Story currentStory = _stories[_currentStoryIndex];
   List<Choice> choices = currentStory.choices;
   choices.forEach((choice) {
     if (choice.choice == userChoice) {
       if (choice.storyIndex != -1) {
         _currentStoryIndex = choice.storyIndex;
-        changed = true;
       }
     }
   });
-  return changed;
+}
+
+bool lastChoice(String userChoice) {
+  bool lastChoice = false;
+  Story currentStory = _stories[_currentStoryIndex];
+  List<Choice> choices = currentStory.choices;
+  choices.forEach((choice) {
+    if (choice.choice == userChoice) {
+      if (choice.storyIndex == -1) {
+        lastChoice = true;
+      }
+    }
+  });
+  return lastChoice;
 }
 
 String getOutcome(String userChoice) {

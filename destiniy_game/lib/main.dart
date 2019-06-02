@@ -25,32 +25,37 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void showOutcome(String choice, BuildContext context) {
+    String outcome = getOutcome(choice);
+    print('outcome_$outcome');
     Alert(
+        title: '',
         context: context,
         content: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                  getOutcome(choice),
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.blueGrey[800],
-                  ),
-                ),
-              ),
-              RaisedButton(
-                child: Text('Reset Game'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  resetStoryDriver();
-                },
-              )
-            ],
+          margin: EdgeInsets.only(bottom: 50.0),
+          child: Text(
+            outcome,
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.blueGrey[800],
+            ),
           ),
-        ));
+        ),
+        buttons: [
+          DialogButton(
+            child: Text(
+              "Reset Story",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                resetStoryDriver();
+              });
+            },
+          )
+        ]).show();
   }
 
   @override
@@ -73,8 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 6,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 60.0,
+                      horizontal: 40.0,
+                      vertical: 100.0,
                     ),
                     child: Card(
                       color: const Color.fromARGB(200, 255, 255, 255),
@@ -114,11 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       color: Colors.red[700],
                       onPressed: () {
-                        setState(() {
-                          if (!makeAChoice(firstChoice)) {
-                            showOutcome(firstChoice, context);
-                          }
-                        });
+                        print(lastChoice(firstChoice));
+                        if (lastChoice(firstChoice)) {
+                          showOutcome(firstChoice, context);
+                        } else {
+                          setState(() {
+                            makeAChoice(firstChoice);
+                          });
+                        }
                       },
                     ),
                   ),
@@ -142,8 +150,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.indigo[800],
                       onPressed: () {
                         setState(() {
-                          if (!makeAChoice(secondChoice)) {
+                          print(lastChoice(secondChoice));
+                          if (lastChoice(secondChoice)) {
                             showOutcome(secondChoice, context);
+                          } else {
+                            setState(() {
+                              makeAChoice(secondChoice);
+                            });
                           }
                         });
                       },
