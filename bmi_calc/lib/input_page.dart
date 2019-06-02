@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'widget/custom_card.dart';
+import 'widget/icon_content_card.dart';
+
+const secondaryBackgroundColor = Color(0xFF1D1F33);
+const accentColor = Color(0xFFEA1556);
+const customBarHeight = 80.0;
 
 class InputPage extends StatefulWidget {
   InputPage({Key key}) : super(key: key);
@@ -25,21 +33,25 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: CustomCard(
-                        color: Color(0xFF1D1F33),
+                      child: IconContentCard(
+                        color: secondaryBackgroundColor,
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
                       ),
                     ),
                     Expanded(
-                      child: CustomCard(
-                        color: Color(0xFF1D1F33),
+                      child: IconContentCard(
+                        color: secondaryBackgroundColor,
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
               Expanded(
                 child: CustomCard(
-                  color: Color(0xFF1D1F33),
+                  color: secondaryBackgroundColor,
                 ),
               ),
               Expanded(
@@ -47,37 +59,25 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       child: CustomCard(
-                        color: Color(0xFF1D1F33),
+                        color: secondaryBackgroundColor,
                       ),
                     ),
                     Expanded(
                       child: CustomCard(
-                        color: Color(0xFF1D1F33),
+                        color: secondaryBackgroundColor,
                       ),
                     )
                   ],
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 8.0),
+                color: accentColor,
+                height: customBarHeight,
+              )
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomCard extends StatelessWidget {
-  CustomCard({@required this.color});
-
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }
