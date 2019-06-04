@@ -7,11 +7,13 @@ class TwoChildrenCard extends StatelessWidget {
     @required this.color,
     this.topChild,
     this.bottomChild,
+    this.onTap,
   });
 
   final Color color;
   final Widget topChild;
   final Widget bottomChild;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TwoChildrenCard extends StatelessWidget {
           bottomChild,
         ],
       ),
+      onTap: onTap,
     );
   }
 }

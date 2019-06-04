@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'styles.dart';
 import 'widget/custom_card.dart';
 import 'widget/icon_content_card.dart';
-
-const activeCardColor = Color(0xFF1D1F33);
-const inactiveCardColor = Color(0xFF101223);
-const accentColor = Color(0xFFEA1556);
-const customBarHeight = 80.0;
 
 enum Gender {
   male,
@@ -22,6 +18,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 48;
 
   @override
   Widget build(BuildContext context) {
@@ -41,35 +38,31 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: GestureDetector(
+                      child: IconContentCard(
+                        color: selectedGender == Gender.male
+                            ? kActiveCardColor
+                            : kInactiveCardColor,
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
                         onTap: () {
                           setState(() {
                             selectedGender = Gender.male;
                           });
                         },
-                        child: IconContentCard(
-                          color: selectedGender == Gender.male
-                              ? activeCardColor
-                              : inactiveCardColor,
-                          icon: FontAwesomeIcons.mars,
-                          label: 'MALE',
-                        ),
                       ),
                     ),
                     Expanded(
-                      child: GestureDetector(
+                      child: IconContentCard(
+                        color: selectedGender == Gender.female
+                            ? kActiveCardColor
+                            : kInactiveCardColor,
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
                         onTap: () {
                           setState(() {
                             selectedGender = Gender.female;
                           });
                         },
-                        child: IconContentCard(
-                          color: selectedGender == Gender.female
-                              ? activeCardColor
-                              : inactiveCardColor,
-                          icon: FontAwesomeIcons.venus,
-                          label: 'FEMALE',
-                        ),
                       ),
                     ),
                   ],
@@ -77,7 +70,70 @@ class _InputPageState extends State<InputPage> {
               ),
               Expanded(
                 child: CustomCard(
-                  color: activeCardColor,
+                  color: kActiveCardColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'HEIGHT',
+                          style: kDisabledTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: <Widget>[
+                            Text(
+                              (height / 12).floor().toString(),
+                              style: kLargeFont,
+                            ),
+                            Text(
+                              'ft',
+                              style: kDisabledTextStyle,
+                            ),
+                            Container(
+                              width: 5.0,
+                            ),
+                            Text(
+                              (height % 12).round().toString(),
+                              style: kLargeFont,
+                            ),
+                            Text(
+                              'in',
+                              style: kDisabledTextStyle,
+                            )
+                          ],
+                        ),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: Colors.white,
+                              inactiveTrackColor: kInactiveFontColor,
+                              thumbColor: kAccentColor,
+                              thumbShape: RoundSliderThumbShape(
+                                enabledThumbRadius: 13.0,
+                              ),
+                              overlayShape: RoundSliderOverlayShape(
+                                overlayRadius: 30.0,
+                              ),
+                              overlayColor: Color(0x29EA1556)),
+                          child: Slider(
+                            value: height.toDouble(),
+                            min: 36.0,
+                            max: 84.0,
+                            onChanged: (newHeight) {
+                              setState(() {
+                                height = newHeight.round();
+                              });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -85,12 +141,12 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       child: CustomCard(
-                        color: activeCardColor,
+                        color: kActiveCardColor,
                       ),
                     ),
                     Expanded(
                       child: CustomCard(
-                        color: activeCardColor,
+                        color: kActiveCardColor,
                       ),
                     )
                   ],
@@ -98,8 +154,8 @@ class _InputPageState extends State<InputPage> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 8.0),
-                color: accentColor,
-                height: customBarHeight,
+                color: kAccentColor,
+                height: kCustomBarHeight,
               )
             ],
           ),

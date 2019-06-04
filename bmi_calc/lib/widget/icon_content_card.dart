@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../styles.dart';
 import 'two_children_card.dart';
 
-const iconFontSize = 80.0;
-final disabledTextStyle = TextStyle(
-  color: Colors.grey[400],
-  fontSize: 18.0,
-  fontWeight: FontWeight.w700,
-);
-const spaceBetween = 30.0;
-
 class IconContentCard extends StatelessWidget {
-  IconContentCard({this.color, this.icon, this.label});
+  IconContentCard({
+    this.color,
+    this.icon,
+    this.label,
+    this.onTap,
+  });
 
   final Color color;
   final IconData icon;
   final String label;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +22,15 @@ class IconContentCard extends StatelessWidget {
       color: color,
       topChild: Icon(
         icon,
-        size: iconFontSize,
+        size: kIconFontSize,
       ),
       bottomChild: Container(
         margin: EdgeInsets.only(
-          top: spaceBetween,
+          top: kSpaceBetween,
         ),
-        child: Text(label, style: disabledTextStyle),
+        child: Text(label, style: kDisabledTextStyle),
       ),
+      onTap: onTap,
     );
   }
 }
