@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'styles.dart';
 import 'widget/custom_card.dart';
 import 'widget/icon_content_card.dart';
+import 'widget/round_icon_button.dart';
 
 enum Gender {
   male,
@@ -19,12 +20,15 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 48;
+  int weight = 35;
+  int age = 12;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI Calculator'),
+        elevation: 15.0,
       ),
       body: SafeArea(
         child: Container(
@@ -111,13 +115,13 @@ class _InputPageState extends State<InputPage> {
                         SliderTheme(
                           data: SliderTheme.of(context).copyWith(
                               activeTrackColor: Colors.white,
-                              inactiveTrackColor: kInactiveFontColor,
+                              inactiveTrackColor: Colors.grey[700],
                               thumbColor: kAccentColor,
                               thumbShape: RoundSliderThumbShape(
                                 enabledThumbRadius: 13.0,
                               ),
                               overlayShape: RoundSliderOverlayShape(
-                                overlayRadius: 30.0,
+                                overlayRadius: 25.0,
                               ),
                               overlayColor: Color(0x29EA1556)),
                           child: Slider(
@@ -141,8 +145,44 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Expanded(
                       child: CustomCard(
-                        color: kActiveCardColor,
-                      ),
+                          color: kActiveCardColor,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'WEIGHT',
+                                style: kDisabledTextStyle,
+                              ),
+                              Text(
+                                weight.toString(),
+                                style: kLargeFont,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  RoundIconButton(
+                                    icon: FontAwesomeIcons.minus,
+                                    onPressed: () {
+                                      setState(() {
+                                        weight--;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  RoundIconButton(
+                                    icon: FontAwesomeIcons.plus,
+                                    onPressed: () {
+                                      setState(() {
+                                        weight++;
+                                      });
+                                    },
+                                  )
+                                ],
+                              )
+                            ],
+                          )),
                     ),
                     Expanded(
                       child: CustomCard(
