@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'bmi_calc.dart';
+import 'results_page.dart';
 import 'styles.dart';
+import 'widget/bottom_button.dart';
 import 'widget/custom_card.dart';
 import 'widget/icon_content_card.dart';
-import 'widget/round_icon_button.dart';
+import 'widget/property_update_card.dart';
 
 enum Gender {
   male,
@@ -144,58 +147,57 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: CustomCard(
-                          color: kActiveCardColor,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'WEIGHT',
-                                style: kDisabledTextStyle,
-                              ),
-                              Text(
-                                weight.toString(),
-                                style: kLargeFont,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.minus,
-                                    onPressed: () {
-                                      setState(() {
-                                        weight--;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  RoundIconButton(
-                                    icon: FontAwesomeIcons.plus,
-                                    onPressed: () {
-                                      setState(() {
-                                        weight++;
-                                      });
-                                    },
-                                  )
-                                ],
-                              )
-                            ],
-                          )),
+                      child: PropertyUpdateCard(
+                        property: weight,
+                        propertyName: 'WEIGHT',
+                        onDecrease: () {
+                          setState(() {
+                            weight--;
+                          });
+                        },
+                        onIncrease: () {
+                          setState(() {
+                            weight++;
+                          });
+                        },
+                      ),
                     ),
                     Expanded(
-                      child: CustomCard(
-                        color: kActiveCardColor,
+                      child: PropertyUpdateCard(
+                        property: age,
+                        propertyName: 'AGE',
+                        onDecrease: () {
+                          setState(() {
+                            age--;
+                          });
+                        },
+                        onIncrease: () {
+                          setState(() {
+                            age++;
+                          });
+                        },
                       ),
                     )
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 8.0),
-                color: kAccentColor,
-                height: kCustomBarHeight,
+              BottomButton(
+                text: 'CALCULATE',
+                onTap: () {
+                  Person person = new Person(
+                    gender: selectedGender.toString(),
+                    age: age,
+                    weight: weight,
+                    height: height,
+                  );
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultsPage(person: person),
+                    ),
+                  );
+                },
               )
             ],
           ),
