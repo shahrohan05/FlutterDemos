@@ -17,7 +17,7 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your BMI'),
+        title: Text('BMI Calculator'),
       ),
       body: Center(
         child: SafeArea(
