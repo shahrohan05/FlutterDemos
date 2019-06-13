@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationScreen extends StatelessWidget {
+class LocationScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => LocationScreenState();
+}
+
+class LocationScreenState extends State<LocationScreen> {
   void getLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print('User\'s Position: $position');
+    try {
+      Position position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+      print('User\'s Position: $position');
+    }catch(e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getLocation();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(
-          child: RaisedButton(
-            child: Text('GET LOCATION'),
-            onPressed: () {
-              getLocation();
-            },
-          ),
-        ),
+        child: Center(child: Container()),
       ),
     );
   }
