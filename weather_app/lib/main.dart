@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/location_screen.dart';
+import 'screens/loading_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: LocationScreen(),
+      home: LoadingScreen(),
     );
   }
 }
