@@ -5,6 +5,9 @@ import 'package:weather_app/services/location.dart';
 import 'package:weather_app/services/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
+  LoadingScreen({this.getWeather});
+
+  final getWeather;
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }
@@ -33,13 +36,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   void initState() {
-    getLocation();
+    if (widget.getWeather) {
+      getLocation();
+    }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0x55707070),
       body: Container(
         child: Center(
           child: AwesomeLoader(

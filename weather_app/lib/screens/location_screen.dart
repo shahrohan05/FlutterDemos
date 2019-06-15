@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/city_screen.dart';
+import 'package:weather_app/screens/loading_screen.dart';
 import 'package:weather_app/services/location.dart';
 import 'package:weather_app/services/weather.dart';
 import 'package:weather_app/utils/constants.dart';
@@ -14,14 +15,14 @@ class LocationScreen extends StatefulWidget {
 }
 
 class LocationScreenState extends State<LocationScreen> {
-  String weatherEmoji = '☀';
-  String cityName = 'Little Wadia';
-  String weatherCondition = 'It\'s sunny and bright outside';
-
-  void updateWeatherOnLocationUpdate() async {
+  Future<void> updateWeatherOnLocationUpdate() async {
     Location location = Location();
     await location.getLocation();
     await widget.weather.getWeatherFromNetwork(location);
+  }
+
+  Future<void> updateWeatherForCityName(cityName) async {
+    await widget.weather.updateForCityLocation(cityName);
   }
 
   @override
@@ -42,17 +43,23 @@ class LocationScreenState extends State<LocationScreen> {
                   IconButton(
                     icon: Icon(Icons.near_me),
                     iconSize: kLargeIconSize,
-                    onPressed: () {
+                    onPressed: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LoadingScreen(getWeather: false)));
+                      await updateWeatherOnLocationUpdate();
                       setState(() {
-                        updateWeatherOnLocationUpdate();
+                        Navigator.pop(context);
                       });
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.location_city),
                     iconSize: kLargeIconSize,
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                      final newCityName = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
@@ -60,6 +67,17 @@ class LocationScreenState extends State<LocationScreen> {
                           },
                         ),
                       );
+                      if (newCityName != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoadingScreen(getWeather: false)));
+                        await updateWeatherForCityName(newCityName);
+                        setState(() {
+                          Navigator.pop(context);
+                        });
+                      }
                     },
                   ),
                 ],

@@ -11,11 +11,23 @@ class Weather {
   int weatherCondition;
   String icon;
 
+  Future<void> updateForCityLocation(newCityName) async {
+    var url =
+        '$kOpenWeatherBaseUrl?q=$newCityName&appid=$kOpenWeatherAppId&units=metric';
+    var responseData = await NetworkHelper(url: url).get();
+    print(responseData);
+    _updateWithOpenWeatherResponse(responseData);
+  }
+
   Future<void> getWeatherFromNetwork(Location location) async {
     var url =
         '$kOpenWeatherBaseUrl?lat=${location.latitude}&lon=${location.longitude}&appid=$kOpenWeatherAppId&units=metric';
     var responseData = await NetworkHelper(url: url).get();
     print(responseData);
+    _updateWithOpenWeatherResponse(responseData);
+  }
+
+  void _updateWithOpenWeatherResponse(responseData) {
     this.city = responseData['name'];
     dynamic temp = responseData['main']['temp'];
     this.temp = temp.toInt();

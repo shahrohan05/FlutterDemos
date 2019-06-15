@@ -44,3 +44,9 @@ const kLargeTextPaddingRightAligned = EdgeInsets.fromLTRB(
   5.0,
   15.0,
 );
+
+const kDisableLargeTextStyle = TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.grey,
+);
