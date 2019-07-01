@@ -19,10 +19,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                width: 250.0,
-                padding: EdgeInsets.only(right: 5.0),
-                child: Image.asset('images/fire_icon.png'),
+              Hero(
+                tag: 'logo',
+                child: Container(
+                  width: 250.0,
+                  padding: EdgeInsets.only(right: 5.0),
+                  child: Image.asset('images/fire_icon.png'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 25.0),
@@ -45,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
               PillButton(
-                text: 'Registration',
+                text: 'Register',
                 minWidth: 300.0,
                 onPressed: () {
                   Navigator.pushNamed(context, RegistrationScreen.route);
