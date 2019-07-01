@@ -1,4 +1,7 @@
 import 'package:fire_chat/constants.dart';
+import 'package:fire_chat/screens/login_screen.dart';
+import 'package:fire_chat/screens/registration_screen.dart';
+import 'package:fire_chat/widgets/pill_button.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -22,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Image.asset('images/fire_icon.png'),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 35.0),
+                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 25.0),
                 child: Text(
                   'Fire Chat',
                   style: TextStyle(
@@ -31,11 +34,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: kLightTheme),
                 ),
               ),
-              RaisedButton(
-                child: Text('Login'),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: PillButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.route);
+                  },
+                  text: 'Login',
+                  minWidth: 300.0,
+                ),
               ),
-              RaisedButton(
-                child: Text('Registration'),
+              PillButton(
+                text: 'Registration',
+                minWidth: 300.0,
+                onPressed: () {
+                  Navigator.pushNamed(context, RegistrationScreen.route);
+                },
               ),
             ],
           ),
