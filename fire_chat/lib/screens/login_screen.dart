@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Hero(
                 tag: 'logo',
                 child: Container(
-                  width: 200.0,
+                  width: 150.0,
                   padding: EdgeInsets.only(right: 5.0),
                   child: Image.asset('images/fire_icon.png'),
                 ),

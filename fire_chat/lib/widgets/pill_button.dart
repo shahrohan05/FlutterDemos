@@ -19,6 +19,7 @@ class PillButton extends StatelessWidget {
     return ButtonTheme(
       minWidth: minWidth,
       child: RaisedButton(
+        elevation: 12.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
