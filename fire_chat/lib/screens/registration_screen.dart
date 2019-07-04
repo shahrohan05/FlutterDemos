@@ -37,12 +37,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Hero(
-                      tag: 'logo',
-                      child: Container(
-                        width: 120.0,
-                        padding: EdgeInsets.fromLTRB(0.0, 13.0, 0.2, 0.0),
-                        child: Image.asset('images/fire_icon.png'),
+                    Flexible(
+                      child: Hero(
+                        tag: 'logo',
+                        child: Container(
+                          width: 120.0,
+                          padding: EdgeInsets.fromLTRB(0.0, 13.0, 5.0, 0.0),
+                          child: Image.asset('images/fire_icon.png'),
+                        ),
                       ),
                     ),
                     Padding(

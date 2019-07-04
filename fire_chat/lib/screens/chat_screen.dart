@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fire_chat/widgets/message_bubble.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,8 @@ class _ChatScreenState extends State<ChatScreen> {
   String _enteredMessage = '';
   FirebaseUser _user;
 
+  TextEditingController _messageFieldController = TextEditingController();
+
   void getCurrentUser() async {
     try {
       final FirebaseUser user = await _auth.currentUser();
@@ -27,6 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  /* SAMPLE CODE
   void getMessages() async {
     final QuerySnapshot messages =
         await _firestore.collection("chat").getDocuments();
@@ -42,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
         print(message.data);
       }
     }
-  }
+  }*/
 
   @override
   void initState() {
@@ -81,14 +85,21 @@ class _ChatScreenState extends State<ChatScreen> {
                             );
                           }
 
-                          List<Text> messagesWidgets = [];
+                          List<MessageBubble> messagesWidgets = [];
 
                           for (DocumentSnapshot message
-                              in snapshot.data.documents) {
-                            messagesWidgets.add(Text(
-                                '${message.data['text']} from ${message.data['sender']}'));
+                              in snapshot.data.documents.reversed) {
+                            messagesWidgets.add(
+                              MessageBubble(
+                                message: message.data['text'],
+                                sender: message.data['sender'],
+                                fromOthers:
+                                    message.data['sender'] != _user.email,
+                              ),
+                            );
                           }
-                          return Column(
+                          return ListView(
+                            reverse: true,
                             children: messagesWidgets,
                           );
                         },
@@ -104,7 +115,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               maxLines: null,
-                              decoration: InputDecoration(),
+                              controller: _messageFieldController,
+                              decoration: InputDecoration(
+                                  hintText: 'Enter your message here...'),
                               onChanged: (value) {
                                 _enteredMessage = value;
                               },
@@ -114,7 +127,16 @@ class _ChatScreenState extends State<ChatScreen> {
                         IconButton(
                           icon: Icon(Icons.send),
                           onPressed: () {
-                            if (_enteredMessage == "") {}
+                            if (_enteredMessage == "") {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Please enter a message to send!'),
+                                ),
+                              );
+                              return;
+                            }
+                            _messageFieldController.clear();
                             _firestore.collection('chat').add({
                               'sender': _user.email,
                               'text': _enteredMessage,

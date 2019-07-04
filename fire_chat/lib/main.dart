@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
             color: kMainAccent,
           )),
       initialRoute: WelcomeScreen.route,
+      debugShowCheckedModeBanner: false,
       routes: {
         WelcomeScreen.route: (context) => WelcomeScreen(),
         ChatScreen.route: (context) => ChatScreen(),
