@@ -13,11 +13,16 @@ class PillInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool obscureText = false;
+    TextInputType textInputType = TextInputType.text;
 
     if (hint == 'Password') {
       obscureText = true;
     }
 
+    if (hint.toLowerCase().contains('email') ||
+        hint.toLowerCase().contains('e-mail')) {
+      textInputType = TextInputType.emailAddress;
+    }
     return Container(
       width: width,
       child: TextField(
@@ -28,6 +33,7 @@ class PillInput extends StatelessWidget {
           ),
           contentPadding: EdgeInsets.all(10.0),
         ),
+        keyboardType: textInputType,
         onChanged: this.onChanged,
         textAlign: TextAlign.center,
         obscureText: obscureText,

@@ -1,5 +1,6 @@
 import 'package:fire_chat/widgets/pill_button.dart';
 import 'package:fire_chat/widgets/pill_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -9,6 +10,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +39,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 30.0, vertical: 10.0),
                 child: PillInput(
-                  onChanged: (value) {},
-                  hint: 'Username',
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  hint: 'Email Address',
                   width: 300.0,
                 ),
               ),
@@ -42,7 +50,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 30.0, vertical: 10.0),
                 child: PillInput(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    password = value;
+                  },
                   hint: 'Password',
                   width: 300.0,
                 ),
@@ -50,7 +60,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: PillButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      final FirebaseUser user =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      if (user != null) {
+                        print(user);
+                        //Navigator.pushNamed(context, ChatScreen.route);
+                      }
+                    } catch (e) {
+                      print("Error registering user!");
+                      print(e);
+                    }
+                  },
                   text: 'Register',
                   minWidth: 300.0,
                 ),

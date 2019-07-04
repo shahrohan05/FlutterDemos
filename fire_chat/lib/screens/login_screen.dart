@@ -10,6 +10,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     horizontal: 30.0, vertical: 10.0),
                 child: PillInput(
                   onChanged: (value) {},
-                  hint: 'Username',
+                  hint: 'Email Address',
                   width: 300.0,
                 ),
               ),
