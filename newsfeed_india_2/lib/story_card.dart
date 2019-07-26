@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-/*import 'package:url_launcher/url_launcher.dart' as urlLauncher;*/
+import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 
 class StoryCard extends StatelessWidget {
   StoryCard({this.title, this.imageUrl, this.url});
@@ -9,9 +9,9 @@ class StoryCard extends StatelessWidget {
 
   _launchUrl(url) async {
     print('tapped link $url');
-    /*if (await urlLauncher.canLaunch(url)) {
+    if (await urlLauncher.canLaunch(url)) {
       await urlLauncher.launch(url);
-    }*/
+    }
   }
 
   @override

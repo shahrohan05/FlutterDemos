@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 
 import 'network_helper.dart';
 import 'story_card.dart';
@@ -52,9 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _launchUrl(url) async {
     print('tapped link $url');
-    /*if (await urlLauncher.canLaunch(url)) {
+    if (await urlLauncher.canLaunch(url)) {
       await urlLauncher.launch(url);
-    }*/
+    }
   }
 
   @override
