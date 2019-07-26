@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1707622067",
+    "firebase_url": "https://newsfeed-in.firebaseio.com",
+    "project_id": "newsfeed-in",
+    "storage_bucket": "newsfeed-in.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1707622067:android:8760b010fbe7523d",
+        "android_client_info": {
+          "package_name": "rohan.flutterdemos.newsfeed_india_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1707622067-6pgl00raj6mds88b9ebe865r5md60sbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xXm9U0I5ZpqjPyi7_SNB0LQOzLQDdrc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1707622067-6pgl00raj6mds88b9ebe865r5md60sbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
